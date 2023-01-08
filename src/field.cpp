@@ -12,22 +12,35 @@ Field& Field::operator [] (int value){
 
     if (fish == NULL ) {
         field[value] = 1;
-        return *this;
+    }else {
+        place = value;
     }
+    return *this;
+
+
+}
+void Field::addBoot (Boot *oth){
+    if(place == -1){ std::cout << "fish not plased yet"<<std::endl;}
     else {
-        if (field[value] != 1 && field[value != 2]){
-            if(boot1 == NULL || boot2 == NULL || boot3 == NULL){
-                field[value] = 2;
-                return *this;
-            }else {
-                FieldExceptions ("boots already placed");
+        if (field[place] != 1 && field[place] != 2) {
+            if (boots[0] == NULL || boots[1] == NULL || boots[2] == NULL) {
+                if (boots[0] == NULL) { boots[0] = oth; }
+                else if (boots[1] == NULL) { boots[1] = oth; }
+                else if (boots[2] == NULL) { boots[2] = oth; }
+                field[place] = 2;
+            } else {
+                delete oth;
+                fieldReady = true;
             }
-        }else {
-            throw FieldExceptions ( "this place in the pond is already taken");
+
+        } else {
+            delete oth;
         }
     }
 
-
+}
+bool Field::fieldIsReady (){
+    return fieldReady;
 }
 
 Field::Field(const Field& oth){
@@ -39,10 +52,12 @@ Field::Field(const Field& oth){
 
 void Field::showField(){
     for (int i =0;i<9;++i){
-        if (opnField[i] == false){
+        if (opnField[i] == true){
             std::cout << field[i] <<" ";
-            if ((i+1)%3 == 0){std::cout << std::endl;}
+        }else {
+            std::cout << "- ";
         }
+        if ((i+1)%3 == 0){std::cout << std::endl;}
     }
 }
 
@@ -59,7 +74,7 @@ void Field::openSector  (int sectorNum){
 
 Field::~Field () {
     delete fish;
-    delete boot1;
-    delete boot2;
-    delete boot3;
+    delete boots[0];
+    delete boots[1];
+    delete boots[2];
 };

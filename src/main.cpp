@@ -1,12 +1,19 @@
 #include <iostream>
 #include "field.h"
+#include <ctime>
 
 int main() {
     Field field1;
+    std::srand(std::time(nullptr));
 
     field1[0].fish = new Fish();
-    field1[5].boot1 = new Boot();
-    field1[3].boot2 = new Boot();
-    field1[7].boot3 = new Boot();
+    while (!field1.fieldIsReady()){
+        field1[std::rand() % 9].addBoot(new Boot());
+    }
+
+    field1.showField();
+
+
+
 
 }
