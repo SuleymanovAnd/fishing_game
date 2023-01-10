@@ -1,4 +1,5 @@
 #include "field.h"
+#include <sstream>
 
 Field::Field() {
 
@@ -61,15 +62,32 @@ void Field::showField(){
     }
 }
 
-void Field::openSector  (int sectorNum){
-    opnField[sectorNum] = true;
+bool Field:: gameOver (){
+    return endOfGame;
+}
 
-    if (field[sectorNum] == 1){
-        //throw win;
-    }  else if(field[sectorNum] == 2){
-        //  throw loss;
+void Field::openSector  (int sectorNum){
+    if (sectorNum<1 || sectorNum >9){
+        std::cout << "You hit the pond. There is no such sector.\n"
+                     "Enter a number from 1 to 9.\n";
     }else {
-        std::cout << "this place is empty";}
+
+        opnField[sectorNum-1] = true;
+
+        if (field[sectorNum-1] == 1) {
+            endOfGame = true;
+            ++attempts;
+            std::stringstream temp; temp << " You are win. You spent " << attempts << " attempts.\n";
+            throw FieldExceptions(temp.str());
+
+        } else if (field[sectorNum-1] == 2) {
+            endOfGame = true;
+            throw FieldExceptions("You have caught the boot. You lose\n");
+        } else {
+            ++attempts;
+            std::cout << "this place is empty\n";
+        }
+    }
 }
 
 Field::~Field () {

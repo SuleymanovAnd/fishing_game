@@ -10,6 +10,8 @@ class Field {
     Boot * boots [3] = {NULL,NULL,NULL};
     int place = -1;
     bool fieldReady = false;
+    bool endOfGame = false;
+    int attempts  = 0;
 public:
 
     Fish *fish = NULL;
@@ -18,6 +20,7 @@ public:
     Field ();
     Field (const Field &oth);
     Field& operator [] (int value);
+    bool gameOver ();
     void addBoot (Boot *oth);
     void showField ();
     bool fieldIsReady ();
