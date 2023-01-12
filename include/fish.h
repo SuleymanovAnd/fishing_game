@@ -6,7 +6,5 @@ public:
     Fish (const Fish &oth){
 
     }
-    Fish& operator = (Fish *oth){
 
-    }
 };
