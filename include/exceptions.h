@@ -1,11 +1,12 @@
 #include <iostream>
+#include <exception>
 
-class FieldExceptions {
-    std::string message;
+class FieldExceptions :public std::exception{
+   const char* message;
 public:
-    FieldExceptions(std::string exception) :message(exception){}
+    FieldExceptions(const char*  exception) :message(exception){}
 
-    std::string what ()const noexcept{
+    const char*  what ()const noexcept override{
         return message;
     }
 

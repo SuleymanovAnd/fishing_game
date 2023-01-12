@@ -78,7 +78,7 @@ void Field::openSector  (int sectorNum){
             endOfGame = true;
             ++attempts;
             std::stringstream temp; temp << " You are win. You spent " << attempts << " attempts.\n";
-            throw FieldExceptions(temp.str());
+            throw FieldExceptions(temp.str().c_str());
 
         } else if (field[sectorNum-1] == 2) {
             endOfGame = true;
