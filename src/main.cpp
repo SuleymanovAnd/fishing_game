@@ -27,9 +27,23 @@ int main() {
         system("cls");
         field1.showField();
     }
+/*
+try{ // рабочая упрощенная версия без метода gameOver
+    while(1){
+        std::cout << "Cast your line into one of the 9 sectors of the pond:";
+        int game = 0;
+        std::cin >> game;
+        field1.openSector(game);
 
-
-
+        field1.showField();
+    }
+}
+catch (FieldExceptions &oth){
+    std::cerr << oth.what();
+    Sleep(3000);
+    system("cls");
+}
+*/
 
 
 }
